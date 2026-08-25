@@ -8,6 +8,12 @@
 <meta property="og:title" content="SAORI｜Shopify構築・カスタマイズ">
 <meta property="og:description" content="Dawnテーマの標準機能では届かないところを、ヒアリングして設計し、Liquidのカスタムセクションで形にします。">
 <meta property="og:image" content="https://ssdesignsao.github.io/images/karomi-top.png">
+<script>
+  /* ?w が付いていれば業務委託版。描画前に効かせるため documentElement に付ける */
+  if (new URLSearchParams(location.search).has('w')) {
+    document.documentElement.classList.add('w');
+  }
+</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Zen+Old+Mincho:wght@500&family=Noto+Sans+JP:wght@400;700&family=IBM+Plex+Mono:wght@400&display=swap" rel="stylesheet">
