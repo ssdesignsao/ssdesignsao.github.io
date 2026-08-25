@@ -127,7 +127,8 @@ h4 {
   line-height: 1.9;
 }
 
-.sub {
+.sub,
+figcaption {
   font-size: .875rem;
   line-height: 1.8;
   color: var(--c-ink-sub);
@@ -202,6 +203,11 @@ h3 {
   margin-bottom: var(--s-2);
 }
 
+h4 {
+  margin-top: var(--s-3);
+  margin-bottom: var(--s-1);
+}
+
 p + p { margin-top: var(--s-3); }
 
 
@@ -226,6 +232,217 @@ p + p { margin-top: var(--s-3); }
   /* h4 はPC/SPとも .8125rem のまま */
 
   .lead { font-size: 1.0625rem; }
-  .sub  { font-size: .8125rem; }
   .code { font-size: .8125rem; }
+
+  .sub,
+  figcaption { font-size: .8125rem; }
+}
+
+
+/* ---------------------------------------------
+   7. 各ブロック（§6）
+--------------------------------------------- */
+
+/* 1. hero -------------------------------------- */
+
+/* h1 の右に肩書き。入らなければ折り返して下に落ちる */
+.hero-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  margin-bottom: var(--gap-h2-after);
+}
+
+#hero .lead + .sub { margin-top: var(--s-2); }
+#hero .sub  + .sub { margin-top: var(--s-1); }
+
+
+/* 2. hero-shot / 5. work-screens ---------------- */
+
+#hero-shot img,
+#work-screens img { border: 1px solid var(--c-line); }
+
+figcaption { margin-top: var(--s-2); }
+
+/* 図版名は太字で1行目に。印刷で図が縮んでも画面名が読めるようにする */
+.fig-label { display: block; }
+
+#work-screens {
+  display: flex;
+  flex-direction: column;
+  gap: var(--s-8);
+}
+
+/* 375px幅のスクショを864pxに引き伸ばさない（§6-5） */
+#work-screens .sp { max-width: 20rem; }
+
+
+/* 3. work-overview ----------------------------- */
+
+#work-overview .h2-sub {
+  display: block;
+  margin-top: var(--s-1);
+  font-family: var(--f-sans);
+  font-weight: 400;
+  font-size: .875rem;
+  line-height: 1.8;
+  letter-spacing: normal;
+  color: var(--c-ink-sub);
+}
+
+#work-overview dl {
+  display: grid;
+  grid-template-columns: 7rem 1fr;
+}
+
+#work-overview dt,
+#work-overview dd {
+  padding-block: var(--s-2);
+  border-bottom: 1px solid var(--c-line);
+}
+
+#work-overview dt {
+  font-size: .875rem;
+  line-height: 1.9;
+  color: var(--c-ink-sub);
+}
+
+#work-overview .sub { margin-top: var(--s-2); }
+
+
+/* 4. work-problems ----------------------------- */
+
+/* §8：order で並べ替えるため flex */
+#work-problems {
+  display: flex;
+  flex-direction: column;
+  gap: var(--gap-h3-before);
+}
+
+/* gap で間隔を取るので h3 の上マージンは殺す */
+#work-problems h3 { margin-top: 0; }
+
+
+/* 6. process ----------------------------------- */
+
+/* 表だけ wide、本文は text（§6の幅欄） */
+#process { max-width: var(--w-wide); }
+
+#process > *:not(table) {
+  max-width: var(--w-text);
+  margin-inline: auto;
+}
+
+#process table { margin-block: var(--gap-h3-before); }
+
+#process th,
+#process td {
+  padding: var(--s-2);
+  text-align: left;
+  vertical-align: top;
+}
+
+#process th {
+  background: var(--c-accent-bg);
+  font-weight: 700;
+  font-size: .875rem;
+  line-height: 1.8;
+}
+
+#process td { border-bottom: 1px solid var(--c-line); }
+
+
+/* 7. features ---------------------------------- */
+
+#features ul {
+  display: flex;
+  flex-direction: column;
+  gap: var(--s-2);
+  margin-top: var(--s-3);
+}
+
+
+/* 8. skills ------------------------------------ */
+
+#skills .skill + .skill { margin-top: var(--s-3); }
+
+#skills .skill-title { font-weight: 700; }
+
+/* 見出し行と本文は1つのかたまりとして見せる */
+#skills .skill-title + p { margin-top: 0; }
+
+/* 「対応できないこと」を罫線で軽く区切る（§6-8） */
+#skills .rule-above {
+  border-top: 1px solid var(--c-line);
+  padding-top: var(--gap-h3-before);
+}
+
+
+/* 9. career ------------------------------------ */
+
+#career .timeline {
+  display: flex;
+  flex-direction: column;
+  gap: var(--s-1);
+  margin-top: var(--gap-h3-before);
+}
+
+
+/* 10. contact ---------------------------------- */
+
+#contact {
+  border-top: 1px solid var(--c-line);
+  padding-top: var(--gap-h2-after);
+}
+
+
+/* ---------------------------------------------
+   8. 各ブロックのSP（〜768px）
+--------------------------------------------- */
+
+@media (max-width: 768px) {
+
+  #work-overview .h2-sub { font-size: .8125rem; }
+
+  /* dl は1列に縦積み。罫線は dd の下だけに残す */
+  #work-overview dl { grid-template-columns: 1fr; }
+
+  #work-overview dt {
+    padding-bottom: 0;
+    border-bottom: none;
+    font-size: .8125rem;
+  }
+
+  #work-overview dd { padding-top: var(--s-1); }
+
+  /* 表は行ごとにカード化（§6-6） */
+  #process thead { display: none; }
+
+  #process table,
+  #process tbody,
+  #process tr,
+  #process td { display: block; }
+
+  #process tr {
+    border: 1px solid var(--c-line);
+    padding: var(--s-3);
+  }
+
+  #process tr + tr { margin-top: var(--s-2); }
+
+  #process td {
+    padding: 0;
+    border-bottom: none;
+  }
+
+  #process td + td { margin-top: var(--s-2); }
+
+  /* 1列目（工程名）は data-label が空なのでラベルを出さない */
+  #process td[data-label]:not([data-label=""])::before {
+    content: attr(data-label);
+    display: block;
+    font-size: .8125rem;
+    line-height: 1.8;
+    color: var(--c-ink-sub);
+  }
 }
