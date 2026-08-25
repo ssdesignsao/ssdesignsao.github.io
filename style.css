@@ -231,9 +231,11 @@ p + p { margin-top: var(--s-3); }
 
 /* ---------------------------------------------
    6. SP（〜768px）※ブレークポイントはここ1つだけ（§4）
+   screen に限定する。A4の本文領域は178mm≒673pxで768pxを下回るため、
+   限定しないと応募PDFがスマホ用レイアウトで出力される
 --------------------------------------------- */
 
-@media (max-width: 768px) {
+@media screen and (max-width: 768px) {
 
   :root {
     --pad-x: 1.5rem;
@@ -412,10 +414,10 @@ figcaption { margin-top: var(--s-2); }
 
 
 /* ---------------------------------------------
-   8. 各ブロックのSP（〜768px）
+   8. 各ブロックのSP（〜768px）※同じく screen に限定する
 --------------------------------------------- */
 
-@media (max-width: 768px) {
+@media screen and (max-width: 768px) {
 
   #work-overview .h2-sub { font-size: .8125rem; }
 
@@ -460,4 +462,75 @@ figcaption { margin-top: var(--s-2); }
     line-height: 1.8;
     color: var(--c-ink-sub);
   }
+}
+
+
+/* ---------------------------------------------
+   9. 印刷（A4・応募PDF）§9
+--------------------------------------------- */
+
+@page {
+  size: A4;
+  margin: 18mm 16mm;
+}
+
+@media print {
+
+  /* 級数の基準を10.5ptに移す。本文・補助文字・等幅・h4 はremのまま
+     追従し、見出しだけ§9の指定値で上書きする */
+  html { font-size: 10.5pt; }
+
+  body {
+    line-height: 1.75;
+    background: none;
+  }
+
+  h1 { font-size: 18pt; }
+  h2 { font-size: 14pt; }
+  h3 { font-size: 11.5pt; }
+
+  /* 幅の制限を解除して紙の本文領域いっぱいに流す（§9） */
+  main {
+    max-width: none;
+    padding: 0;
+    gap: 24pt;
+  }
+
+  main > *,
+  #process > *:not(table) { max-width: none; }
+
+  /* 図版は幅を揃えて上限をかける。紙面が図で埋まるのを防ぐ */
+  #hero-shot img,
+  #work-screens img { max-width: 120mm; }
+
+  #work-screens .sp { max-width: none; }
+  #work-screens .sp img { max-width: 60mm; }
+
+  #work-screens { gap: 24pt; }
+
+  /* ③の表ヘッダー：塗りを外して罫線に置き換える（§9） */
+  #process th {
+    background: none;
+    border-bottom: 1px solid var(--c-line);
+  }
+
+  /* 改ページ。section 全体には avoid をかけない（④が長く空白ページが出る） */
+  figure,
+  #process tr,
+  #features article,
+  #career .timeline { break-inside: avoid; }
+
+  /* 見出しだけが行末に取り残されないようにする */
+  h2, h3, h4 { break-after: avoid; }
+
+  p { orphans: 2; widows: 2; }
+
+  /* URLは展開しない（§9）。ただし①⑩の連絡先だけは紙から辿れるよう出す */
+  a {
+    color: inherit;
+    text-decoration: none;
+  }
+
+  #hero .contact-line a[href^="http"]::after,
+  #contact a[href^="http"]::after { content: "（" attr(href) "）"; }
 }
