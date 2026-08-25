@@ -1,0 +1,231 @@
+@charset "UTF-8";
+
+/* =============================================
+   SAORI ポートフォリオ
+   値は portfolio-style-spec.md §2〜§5 のみ。
+   ここにない値を足さない。
+============================================= */
+
+
+/* ---------------------------------------------
+   1. 変数
+--------------------------------------------- */
+
+:root {
+
+  /* 配色（§2） */
+  --c-bg:        #FCFCFA;
+  --c-ink:       #2E322D;
+  --c-ink-sub:   #6E7269;
+  --c-line:      #DEE0DA;
+  --c-accent:    #7C8B6F;
+  --c-accent-bg: #EEF1EA;
+
+  /* 書体（§3-1） */
+  --f-serif: "Zen Old Mincho", serif;
+  --f-sans:  "Noto Sans JP", sans-serif;
+  --f-mono:  "IBM Plex Mono", monospace;
+
+  /* レイアウト（§4） */
+  --w-text: 40rem;
+  --w-wide: 54rem;
+  --pad-x:  2rem;
+
+  /* 余白（§5・8pxの倍数のみ） */
+  --s-1:  0.5rem;
+  --s-2:  1rem;
+  --s-3:  1.5rem;
+  --s-4:  2rem;
+  --s-6:  3rem;
+  --s-8:  4rem;
+  --s-12: 6rem;
+
+  /* 適用（§5の表）。PC/SPの差はこの3つの付け替えだけで済ませる */
+  --gap-section:   var(--s-12);
+  --gap-h2-after:  var(--s-4);
+  --gap-h3-before: var(--s-6);
+}
+
+
+/* ---------------------------------------------
+   2. リセット
+--------------------------------------------- */
+
+*,
+*::before,
+*::after { box-sizing: border-box; }
+
+body, h1, h2, h3, h4, p,
+dl, dd, ul, li,
+figure, figcaption, table { margin: 0; padding: 0; }
+
+ul { list-style: none; }
+
+img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+
+/* ---------------------------------------------
+   3. ベース
+--------------------------------------------- */
+
+body {
+  background: var(--c-bg);
+  color: var(--c-ink);
+  font-family: var(--f-sans);
+  font-weight: 400;
+  font-size: 1rem;
+  line-height: 1.9;
+  /* palt は body に入れない（§3-3）。h1／h2 にだけ個別に指定する */
+}
+
+/* 見出し（§3-2） */
+h1, h2, h3 {
+  font-family: var(--f-serif);
+  font-weight: 500;
+}
+
+h1 {
+  font-size: 2rem;
+  line-height: 1.5;
+  letter-spacing: .04em;
+  font-feature-settings: "palt" 1;
+}
+
+h2 {
+  font-size: 1.625rem;
+  line-height: 1.6;
+  letter-spacing: .03em;
+  font-feature-settings: "palt" 1;
+}
+
+h3 {
+  font-size: 1.1875rem;
+  line-height: 1.7;
+}
+
+h4 {
+  font-family: var(--f-sans);
+  font-weight: 700;
+  font-size: .8125rem;
+  line-height: 1.6;
+  letter-spacing: .1em;
+  color: var(--c-accent);
+}
+
+/* 本文まわりの3役（§3-2） */
+.lead {
+  font-size: 1.125rem;
+  line-height: 1.9;
+}
+
+.sub {
+  font-size: .875rem;
+  line-height: 1.8;
+  color: var(--c-ink-sub);
+}
+
+.code {
+  font-family: var(--f-mono);
+  font-size: .875rem;
+  line-height: 1.6;
+  color: var(--c-accent);
+}
+
+/* リンク：色だけで区別しない（§2）ので下線を残す */
+a {
+  color: inherit;
+  text-decoration: underline;
+  text-underline-offset: .2em;
+}
+
+/* フォーカスリングは消さない（§10） */
+:focus-visible {
+  outline: 2px solid var(--c-accent);
+  outline-offset: 2px;
+}
+
+
+/* ---------------------------------------------
+   4. レイアウト（§4）
+--------------------------------------------- */
+
+/* main は flex。§8 の order で③④を入れ替えるため */
+main {
+  display: flex;
+  flex-direction: column;
+  gap: var(--gap-section);
+  max-width: var(--w-wide);
+  margin-inline: auto;
+  padding: var(--gap-section) var(--pad-x);
+}
+
+/* 既定は本文カラム。wide のブロックだけ下で広げる */
+main > * {
+  width: 100%;
+  max-width: var(--w-text);
+  margin-inline: auto;
+}
+
+#hero-shot,
+#work-screens { max-width: var(--w-wide); }
+
+/* §8：.w 側で順序を差し替えられるよう、全ブロックに連番を振っておく */
+#hero          { order: 1; }
+#hero-shot     { order: 2; }
+#work-overview { order: 3; }
+#work-problems { order: 4; }
+#work-screens  { order: 5; }
+#process       { order: 6; }
+#features      { order: 7; }
+#skills        { order: 8; }
+#career        { order: 9; }
+#contact       { order: 10; }
+
+
+/* ---------------------------------------------
+   5. 流し込みの余白（§5）
+--------------------------------------------- */
+
+h2 { margin-bottom: var(--gap-h2-after); }
+
+h3 {
+  margin-top: var(--gap-h3-before);
+  margin-bottom: var(--s-2);
+}
+
+p + p { margin-top: var(--s-3); }
+
+
+/* ---------------------------------------------
+   6. SP（〜768px）※ブレークポイントはここ1つだけ（§4）
+--------------------------------------------- */
+
+@media (max-width: 768px) {
+
+  :root {
+    --pad-x: 1.5rem;
+    --gap-section:   var(--s-8);
+    --gap-h2-after:  var(--s-3);
+    --gap-h3-before: var(--s-4);
+  }
+
+  body { font-size: .9375rem; }
+
+  h1 { font-size: 1.5rem; }
+  h2 { font-size: 1.3125rem; }
+  h3 { font-size: 1.0625rem; }
+  /* h4 はPC/SPとも .8125rem のまま */
+
+  .lead { font-size: 1.0625rem; }
+  .sub  { font-size: .8125rem; }
+  .code { font-size: .8125rem; }
+}
