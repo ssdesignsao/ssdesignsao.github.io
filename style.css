@@ -499,12 +499,13 @@ figcaption { margin-top: var(--s-2); }
   main > *,
   #process > *:not(table) { max-width: none; }
 
-  /* 図版は幅を揃えて上限をかける。紙面が図で埋まるのを防ぐ */
+  /* 図版は幅を揃えて上限をかける。②cは3枚が連続していて図の間に
+     文章がないため、大きいと1枚ごとに改ページして空きページが出る */
   #hero-shot img,
-  #work-screens img { max-width: 120mm; }
+  #work-screens img { max-width: 90mm; }
 
   #work-screens .sp { max-width: none; }
-  #work-screens .sp img { max-width: 60mm; }
+  #work-screens .sp img { max-width: 45mm; }
 
   #work-screens { gap: 24pt; }
 
