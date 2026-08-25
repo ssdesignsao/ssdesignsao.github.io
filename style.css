@@ -169,11 +169,11 @@ main {
   padding: var(--gap-section) var(--pad-x);
 }
 
-/* 既定は本文カラム。wide のブロックだけ下で広げる */
+/* 既定は本文カラム。wide のブロックだけ下で広げる。
+   本文は中央に置かず左端を揃える（見出しが中央寄せに見えるため） */
 main > * {
   width: 100%;
   max-width: var(--w-text);
-  margin-inline: auto;
 }
 
 #hero-shot,
@@ -328,10 +328,7 @@ figcaption { margin-top: var(--s-2); }
 /* 表だけ wide、本文は text（§6の幅欄） */
 #process { max-width: var(--w-wide); }
 
-#process > *:not(table) {
-  max-width: var(--w-text);
-  margin-inline: auto;
-}
+#process > *:not(table) { max-width: var(--w-text); }
 
 #process table { margin-block: var(--gap-h3-before); }
 
