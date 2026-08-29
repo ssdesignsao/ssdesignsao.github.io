@@ -204,11 +204,6 @@ main > * {
 .w #features { order: 6; }
 .w #process  { order: 7; }
 
-/* ②b を 1 → 2 → 3 に戻す（既定はソース順の 3 → 1 → 2） */
-.w #work-problems .problem-1 { order: 1; }
-.w #work-problems .problem-2 { order: 2; }
-.w #work-problems .problem-3 { order: 3; }
-
 
 /* ---------------------------------------------
    5. 流し込みの余白（§5）
