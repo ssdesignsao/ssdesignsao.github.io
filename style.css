@@ -521,12 +521,9 @@ figcaption { margin-top: var(--s-2); }
 
   p { orphans: 2; widows: 2; }
 
-  /* URLは展開しない（§9）。ただし①⑩の連絡先だけは紙から辿れるよう出す */
+  /* URLは展開しない（§9） */
   a {
     color: inherit;
     text-decoration: none;
   }
-
-  #hero .contact-line a[href^="http"]::after,
-  #contact a[href^="http"]::after { content: "（" attr(href) "）"; }
 }
