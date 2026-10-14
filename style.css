@@ -370,6 +370,12 @@ figcaption {
 
 #process td { border-bottom: 1px solid var(--c-line); }
 
+/* 工程名は言葉の途中で折り返さない（「ヒアリン／グ」を防ぐ・10/15）。
+   SP は下のメディアクエリでカード型になり、ここは効かせなくてよい */
+@media screen and (min-width: 769px) {
+  #process td:first-child { white-space: nowrap; }
+}
+
 
 /* 7. features ---------------------------------- */
 
