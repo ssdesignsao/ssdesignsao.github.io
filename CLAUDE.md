@@ -36,7 +36,7 @@ SAORI ポートフォリオ（1ページ・自作HTML・GitHub Pages）の実装
 
 | 役割 | 書体 | ウェイト | 使う場所 |
 |---|---|---|---|
-| 見出し | Zen Old Mincho | 500 | h1／h2／h3 |
+| 見出し | Noto Sans JP | 700 | h1／h2／h3（2026-10-15に明朝から変更） |
 | 本文 | Noto Sans JP | 400・700 | 本文、リード、キャプション |
 | 等幅 | IBM Plex Mono | 400 | セクションのコード名（`c_pdp_spec` 等）、数値ラベル |
 
@@ -45,7 +45,7 @@ SAORI ポートフォリオ（1ページ・自作HTML・GitHub Pages）の実装
 ```html
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Zen+Old+Mincho:wght@500&family=Noto+Sans+JP:wght@400;700&family=IBM+Plex+Mono:wght@400&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700&family=IBM+Plex+Mono:wght@400&display=swap" rel="stylesheet">
 ```
 
 **等幅の使いどころを広げない。** ④のコード名と②aの「規模」の数値まで。
@@ -55,10 +55,10 @@ SAORI ポートフォリオ（1ページ・自作HTML・GitHub Pages）の実装
 
 | 要素 | PC | SP（〜768px） | 行間 | 書体 |
 |---|---|---|---|---|
-| h1（名前） | 2rem | 1.5rem | 1.5 | 明朝500／字間 .04em |
+| h1（名前） | 2rem | 1.5rem | 1.5 | ゴシック700／字間 .04em |
 | ①リード文 | 1.125rem | 1.0625rem | 1.9 | ゴシック400 |
-| h2（セクション見出し） | 1.625rem | 1.3125rem | 1.6 | 明朝500／字間 .03em |
-| h3（小見出し） | 1.1875rem | 1.0625rem | 1.7 | 明朝500 |
+| h2（セクション見出し） | 1.625rem | 1.3125rem | 1.6 | ゴシック700／字間 .03em |
+| h3（小見出し） | 1.1875rem | 1.0625rem | 1.7 | ゴシック700 |
 | h4（課題／実装ラベル） | 0.8125rem | 0.8125rem | 1.6 | ゴシック700／字間 .1em／accent色 |
 | 本文 | 1rem | 0.9375rem | **1.9** | ゴシック400 |
 | 補助文字 | 0.875rem | 0.8125rem | 1.8 | ゴシック400／ink-sub |

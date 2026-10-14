@@ -21,8 +21,7 @@
   --c-accent:    #7C8B6F;
   --c-accent-bg: #EEF1EA;
 
-  /* 書体（§3-1） */
-  --f-serif: "Zen Old Mincho", serif;
+  /* 書体（§3-1）。10/15：見出しも明朝をやめてゴシックに統一 */
   --f-sans:  "Noto Sans JP", sans-serif;
   --f-mono:  "IBM Plex Mono", monospace;
 
@@ -84,32 +83,31 @@ body {
   font-weight: 400;
   font-size: 1rem;
   line-height: 1.9;
-  /* palt は body に入れない（§3-3）。h1／h2 にだけ個別に指定する */
+  /* palt は使わない（10/15：見出しをゴシックにしたら、h1／h2 の palt で詰まりすぎたため外した） */
 }
 
 /* 見出し（§3-2） */
 h1, h2, h3 {
-  font-family: var(--f-serif);
-  font-weight: 500;
+  font-family: var(--f-sans);
+  font-weight: 700;
 }
 
 h1 {
   font-size: 2rem;
   line-height: 1.5;
   letter-spacing: .04em;
-  font-feature-settings: "palt" 1;
 }
 
 h2 {
   font-size: 1.625rem;
   line-height: 1.6;
-  letter-spacing: .03em;
-  font-feature-settings: "palt" 1;
+  letter-spacing: .04em;
 }
 
 h3 {
   font-size: 1.1875rem;
   line-height: 1.7;
+  letter-spacing: .04em;
 }
 
 h4 {
@@ -281,7 +279,11 @@ p + p { margin-top: var(--s-3); }
 #work-screens img,
 .work2-screens img { border: 1px solid var(--c-line); }
 
-figcaption { margin-top: var(--s-2); }
+/* 説明文も文章なので、画像の幅ではなく本文と同じ幅で折り返す（10/15） */
+figcaption {
+  margin-top: var(--s-2);
+  max-width: var(--w-text);
+}
 
 /* 図版名は太字で1行目に。印刷で図が縮んでも画面名が読めるようにする */
 .fig-label { display: block; }
