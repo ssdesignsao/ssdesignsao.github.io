@@ -177,19 +177,22 @@ main > * {
 }
 
 #hero-shot,
-#work-screens { max-width: var(--w-wide); }
+#work-screens,
+#work2 { max-width: var(--w-wide); }
 
 /* §8：.w 側で順序を差し替えられるよう、全ブロックに連番を振っておく */
 #hero          { order: 1; }
 #hero-shot     { order: 2; }
-#work-overview { order: 3; }
+#work-overview { order: 3; }  /* みのりあつめ */
 #work-problems { order: 4; }
-#work-screens  { order: 5; }
-#process       { order: 6; }
-#features      { order: 7; }
-#skills        { order: 8; }
-#career        { order: 9; }
-#contact       { order: 10; }
+#work-design   { order: 5; }
+#work-screens  { order: 6; }
+#process       { order: 7; }  /* 2本共通 */
+#features      { order: 8; }  /* みのりあつめ */
+#work2         { order: 9; }  /* karomi（圧縮版） */
+#skills        { order: 10; }
+#career        { order: 11; }
+#contact       { order: 12; }
 
 
 /* ---------------------------------------------
@@ -200,9 +203,9 @@ main > * {
 
 /* ③制作プロセス と ④実装した機能 を入れ替える。
    §8のコード例は order:1／2 だが、それでは #hero と同値になり
-   ④が2番目に飛ぶ。本文の指示どおり 6 と 7 を入れ替える */
-.w #features { order: 6; }
-.w #process  { order: 7; }
+   ④が2番目に飛ぶ。本文の指示どおり、隣り合う番号どうし（7 と 8）を入れ替える */
+.w #features { order: 7; }
+.w #process  { order: 8; }
 
 
 /* ---------------------------------------------
@@ -275,7 +278,8 @@ p + p { margin-top: var(--s-3); }
 /* 2. hero-shot / 5. work-screens ---------------- */
 
 #hero-shot img,
-#work-screens img { border: 1px solid var(--c-line); }
+#work-screens img,
+.work2-screens img { border: 1px solid var(--c-line); }
 
 figcaption { margin-top: var(--s-2); }
 
@@ -292,9 +296,10 @@ figcaption { margin-top: var(--s-2); }
 #work-screens .sp { max-width: 20rem; }
 
 
-/* 3. work-overview ----------------------------- */
+/* 3. work-overview / work2 の概要 -------------- */
 
-#work-overview .h2-sub {
+/* 作品名の下の業種。みのりあつめ・karomi の両方で使う */
+.h2-sub {
   display: block;
   margin-top: var(--s-1);
   font-family: var(--f-sans);
@@ -305,24 +310,24 @@ figcaption { margin-top: var(--s-2); }
   color: var(--c-ink-sub);
 }
 
-#work-overview dl {
+.spec {
   display: grid;
   grid-template-columns: 7rem 1fr;
 }
 
-#work-overview dt,
-#work-overview dd {
+.spec dt,
+.spec dd {
   padding-block: var(--s-2);
   border-bottom: 1px solid var(--c-line);
 }
 
-#work-overview dt {
+.spec dt {
   font-size: .875rem;
   line-height: 1.9;
   color: var(--c-ink-sub);
 }
 
-#work-overview .sub { margin-top: var(--s-2); }
+.spec + .sub { margin-top: var(--s-2); }
 
 
 /* 4. work-problems ----------------------------- */
@@ -374,6 +379,30 @@ figcaption { margin-top: var(--s-2); }
 }
 
 
+/* 7-2. work2（karomi 圧縮版） ------------------- */
+
+/* 画面2枚だけ wide、ほかは text（#process と同じ考え方） */
+#work2 > *:not(.work2-screens) { max-width: var(--w-text); }
+
+/* 課題は見出し1行＋本文2〜3行のかたまりで並べる */
+.brief-list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--s-3);
+}
+
+.brief-list strong { display: block; }
+
+/* 画面は2枚を横に並べる。高さが違うので上で揃える */
+.work2-screens {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--s-4);
+  align-items: start;
+  margin-top: var(--gap-h3-before);
+}
+
+
 /* 8. skills ------------------------------------ */
 
 #skills .skill + .skill { margin-top: var(--s-3); }
@@ -414,18 +443,24 @@ figcaption { margin-top: var(--s-2); }
 
 @media screen and (max-width: 768px) {
 
-  #work-overview .h2-sub { font-size: .8125rem; }
+  .h2-sub { font-size: .8125rem; }
 
   /* dl は1列に縦積み。罫線は dd の下だけに残す */
-  #work-overview dl { grid-template-columns: 1fr; }
+  .spec { grid-template-columns: 1fr; }
 
-  #work-overview dt {
+  .spec dt {
     padding-bottom: 0;
     border-bottom: none;
     font-size: .8125rem;
   }
 
-  #work-overview dd { padding-top: var(--s-1); }
+  .spec dd { padding-top: var(--s-1); }
+
+  /* karomi の画面2枚は縦に積む */
+  .work2-screens {
+    grid-template-columns: 1fr;
+    gap: var(--s-8);
+  }
 
   /* 表は行ごとにカード化（§6-6） */
   #process thead { display: none; }
@@ -492,7 +527,8 @@ figcaption { margin-top: var(--s-2); }
   }
 
   main > *,
-  #process > *:not(table) { max-width: none; }
+  #process > *:not(table),
+  #work2 > *:not(.work2-screens) { max-width: none; }
 
   /* 図版は幅を揃えて上限をかける。②cは3枚が連続していて図の間に
      文章がないため、大きいと1枚ごとに改ページして空きページが出る */
@@ -511,9 +547,16 @@ figcaption { margin-top: var(--s-2); }
   }
 
   /* 改ページ。section 全体には avoid をかけない（④が長く空白ページが出る） */
+  /* 2本目の作品は新しいページから始める（作品名だけがページ末に残るのを防ぐ） */
+  #work2 { break-before: page; }
+
+  /* karomi の2枚は横並びのまま、段の幅に合わせる */
+  .work2-screens { gap: 24pt; }
+
   figure,
   #process tr,
   #features article,
+  .brief-list li,
   #career .timeline { break-inside: avoid; }
 
   /* 見出しだけが行末に取り残されないようにする */
